@@ -6,6 +6,8 @@
     "build": "node build_deck.js ../GFF_SEOUL_2027_전시산업론_중간과제.pptx"
   },
   "dependencies": {
+    "@expo-google-fonts/noto-sans-kr": "0.4.4",
+    "opentype.js": "1.3.4",
     "pptxgenjs": "3.12.0"
   }
 }
