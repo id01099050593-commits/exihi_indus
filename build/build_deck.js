@@ -6,11 +6,11 @@ const pptxgen = require("pptxgenjs");
 const { C, FONT, makeTools, report } = require("./lib");
 
 const OUT = process.argv[2] || "GFF_SEOUL_2027_전시산업론_중간과제.pptx";
-const AUTHOR = "( 이름 / 학번 )"; // 제출 전 교체
+const AUTHOR = "정신영 / 20222631";
 
 const pres = new pptxgen();
 pres.layout = "LAYOUT_WIDE";
-pres.author = "전시산업론 중간고사";
+pres.author = "정신영";
 pres.title = "고프코어 패션 페어 서울 2027";
 pres.theme = { headFontFace: FONT, bodyFontFace: FONT };
 const T = makeTools(pres);
@@ -36,7 +36,7 @@ function frame(n, title, subtitle, sources, notes) {
   T.text(s, `전시산업론 중간고사 개인 과제   ${n}`, { x: 0.67, y: 0.3, w: 6, h: 0.26 }, { size: 11, color: C.MUTED, name: "과제 표기" });
   s.addText(title, { placeholder: "title" });
   s.addText(subtitle, { placeholder: "subtitle" });
-  T.text(s, sources, { x: 0.67, y: 6.95, w: 11.99, h: 0.5 }, { size: 7, color: C.MUTED, ls: 0.9, name: "출처" });
+  if ([].concat(sources).length) T.text(s, sources, { x: 0.67, y: 6.95, w: 11.99, h: 0.5 }, { size: 7, color: C.MUTED, ls: 0.9, name: "출처" });
   s.addNotes(notes.join("\n\n"));
   return s;
 }
@@ -79,7 +79,7 @@ function label(s, lines, y, sub) {
     { x: CX, y: 1.6, w: CW, h: 0.44 }, { valign: "middle", ls: 1, name: "전시회명" });
   T.text(s, "2027. 9. 30(목) ~ 10. 3(일) · 코엑스(가안) · 트레이드 데이(B2B) 2일 + 퍼블릭 랩 데이(B2C) 2일",
     { x: CX, y: 2.04, w: 7.6, h: 0.24 }, { size: 9.5, valign: "middle", name: "개요" });
-  T.text(s, "작성자: [ 이름 / 학번 ]", { x: CX + 7.6, y: 2.04, w: CW - 7.6, h: 0.24 },
+  T.text(s, "작성자: 정신영 / 20222631", { x: CX + 7.6, y: 2.04, w: CW - 7.6, h: 0.24 },
     { size: 9.5, bold: true, color: C.NAVY, align: "right", valign: "middle", name: "작성자" });
   T.rect(s, { x: CX, y: 2.31, w: CW, h: 0.42 }, C.TINT, { round: true, name: "고프코어 정의 배경" });
   T.text(s, "고프코어란?", { x: CX + 0.12, y: 2.31, w: 0.95, h: 0.42 }, { size: 9, bold: true, color: C.TEAL, valign: "middle", name: "고프코어 정의 제목" });
