@@ -221,6 +221,7 @@ function makeTools(pres) {
   }
 
   // 표: rows = [[cell, ...], ...]; cell = 문자열 | {lines, b, c, fill, align, size, rowspan}
+  // o.dry = true 이면 그리지 않고 높이만 돌려준다(쪽 나누기 계산용).
   // rowspan 칸 아래 행에서는 그 열의 칸을 생략한다(pptxgenjs 방식).
   function table(s, rows, o) {
     const m = o.margin || [2, 4, 2, 4]; // pt: 위 오른쪽 아래 왼쪽
@@ -243,7 +244,7 @@ function makeTools(pres) {
           bold: c.b === undefined ? header : c.b,
           color: c.c || (header ? C.WHITE : C.BODY),
         };
-        check(`${o.name || "표"} ${ri + 1}행 ${col + 1}열`, c.lines, base, o.colW[col] - padIn);
+        if (!o.dry) check(`${o.name || "표"} ${ri + 1}행 ${col + 1}열`, c.lines, base, o.colW[col] - padIn);
         let h = (m[0] + m[2]) / 72;
         c.lines.forEach((line) => (h += lineHeight(line, base, ls)));
         const opt = { valign: c.valign || "middle", align: c.align || "left" };
@@ -270,6 +271,7 @@ function makeTools(pres) {
       if (sum < h + 0.02) rowH[ri + n - 1] += h + 0.02 - sum;
     });
     const total = rowH.reduce((a, b) => a + b, 0);
+    if (o.dry) return total; // 높이만 재고 그리지 않는다
     if (o.maxH && total > o.maxH * 1.01) warnings.push(`[${o.name || "표"}] 높이 ${total.toFixed(2)}in > ${o.maxH.toFixed(2)}in`);
     s.addTable(data, {
       x: o.x, y: o.y, w: o.colW.reduce((a, b) => a + b, 0), colW: o.colW, rowH,

@@ -3,7 +3,8 @@
   "private": true,
   "description": "고프코어 패션 페어 서울 2027 중간과제 PPT 생성 스크립트",
   "scripts": {
-    "build": "node build_deck.js ../GFF_SEOUL_2027_전시산업론_중간과제.pptx"
+    "build": "node build_deck.js ../GFF_SEOUL_2027_전시산업론_중간과제.pptx",
+    "script-pdf": "node make_script_pdf.js ../GFF_SEOUL_2027_바이어_통화대본.pdf"
   },
   "dependencies": {
     "@expo-google-fonts/noto-sans-kr": "0.4.4",
